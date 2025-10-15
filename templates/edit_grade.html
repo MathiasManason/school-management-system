@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Grade</title>
+</head>
+<body>
+    <h2>Edit Grade</h2>
+    <form method="POST">
+        <label>Student Name:</label><br>
+        <input type="text" name="student_name" value="{{ grade.student_name }}" required><br><br>
+
+        <label>Subject:</label><br>
+        <input type="text" name="subject" value="{{ grade.subject }}" required><br><br>
+
+        <label>Score:</label><br>
+        <input type="number" name="score" value="{{ grade.score }}" step="0.01" required><br><br>
+
+        <label>Term:</label><br>
+        <input type="text" name="term" value="{{ grade.term }}" required><br><br>
+
+        <label>Remarks:</label><br>
+        <input type="text" name="remarks" value="{{ grade.remarks }}"><br><br>
+
+        <button type="submit">Save Changes</button>
+        <a href="{{ url_for('manage_grades') }}">Cancel</a>
+    </form>
+</body>
+</html>

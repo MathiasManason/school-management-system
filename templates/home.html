@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to ECWA L Crawford </h1>
+    <h3>Manage students, teachers, and attendance with ease.</h3>
+    <a href="{{ url_for('manage_students') }}" class="btn">Get Started</a>
+  </div>
+</section>
+{% endblock %}

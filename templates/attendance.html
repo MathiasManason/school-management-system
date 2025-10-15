@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Attendance - ECWA School Kaltungo{% endblock %}
+
+{% block content %}
+<h2>📋 Mark Attendance</h2>
+
+<form method="POST" class="attendance-form">
+  <label for="class_select"><strong>Select Class:</strong></label>
+  <select name="class_name" id="class_select" required>
+    <option value="">-- Select a Class --</option>
+    {% for c in classes %}
+      <option value="{{ c.name }}">{{ c.name }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">View Students</button>
+</form>
+
+<hr style="margin: 25px 0; border: 1px solid #ccc;">
+
+{% if selected_class %}
+  <h3>Class: {{ selected_class.name }}</h3>
+  <form method="POST" action="{{ url_for('save_attendance', class_name=selected_class.name) }}">
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Present</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in selected_class.students %}
+          <tr>
+            <td>{{ student }}</td>
+            <td><input type="checkbox" name="present_students" value="{{ student }}"></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+      <button type="submit" class="btn-primary">✅ Save Attendance</button>
+    </div>
+  </form>
+{% endif %}
+
+<hr style="margin: 30px 0; border: 1px solid #ccc;">
+
+<!-- 📤 Export Attendance Section -->
+<div style="text-align: center; margin-top: 30px;">
+  <a href="{{ url_for('export_attendance') }}" class="btn btn-success"
+     style="padding: 10px 18px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">
+    📤 Export All Attendance to CSV
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}School Management System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🏫 ECWA School Kaltungo</div>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('manage_students') }}">Students</a></li>
+        <li><a href="{{ url_for('manage_teachers') }}">Teachers</a></li>
+        <li><a href="{{ url_for('manage_classes') }}">Classes</a></li>
+        <li><a href="{{ url_for('attendance') }}">Attendance</a></li>
+        <li><a href="{{ url_for('manage_grades') }}">Grades</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; Designed and built by Manason Mathias © 2025.</p>
+  </footer>
+</body>
+</html>

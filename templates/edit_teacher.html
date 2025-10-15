@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-card">
+  <h2>Edit Teacher</h2>
+  <form method="POST" class="student-form">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{ teacher.name }}" required>
+    </div>
+    <div class="form-group">
+      <label>Subject:</label>
+      <input type="text" name="subject" value="{{ teacher.subject }}" required>
+    </div>
+    <div class="form-group">
+      <label>Experience (years):</label>
+      <input type="number" name="experience" value="{{ teacher.experience }}" required>
+    </div>
+    <button type="submit" class="btn">Update</button>
+    <a href="{{ url_for('manage_teachers') }}" class="btn-cancel">Cancel</a>
+  </form>
+</div>
+{% endblock %}

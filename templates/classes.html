@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="classes-container">
+  <h2>🏫 Class Management</h2>
+
+  <!-- Add New Class -->
+  <div class="form-card">
+    <h3>Add New Class</h3>
+    <form method="POST" class="class-form">
+      <div class="form-group">
+        <label>Class Name:</label>
+        <input type="text" name="name" placeholder="Enter class name (e.g. JSS 1A)" required>
+      </div>
+
+      <div class="form-group">
+        <label>Teacher:</label>
+        <select name="teacher" required>
+          <option value="">Select Class Teacher</option>
+          {% for teacher in teachers %}
+          <option value="{{ teacher.name }}">{{ teacher.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Students (comma-separated):</label>
+        <input type="text" name="students" placeholder="e.g. John Doe, Mary Jane, Ahmed Musa">
+      </div>
+
+      <button type="submit" class="btn">Add Class</button>
+    </form>
+  </div>
+
+  <!-- Class List -->
+  <div class="table-card">
+    <h3>Existing Classes</h3>
+    {% if classes %}
+    <table class="student-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Class Name</th>
+          <th>Teacher</th>
+          <th>Students</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for school_class in classes %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ school_class.name }}</td>
+          <td>{{ school_class.teacher }}</td>
+          <td>
+            {% if school_class.students %}
+              {{ school_class.students | join(', ') }}
+            {% else %}
+              <em>No students</em>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('edit_class', index=loop.index0) }}" class="btn-edit">Edit</a>
+            <a href="{{ url_for('delete_class', index=loop.index0) }}" class="btn-delete" onclick="return confirm('Delete this class?')">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="no-data">No classes added yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

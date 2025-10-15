@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Manage Grades{% endblock %}
+
+{% block content %}
+<h2>📘 Manage Grades</h2>
+
+<a href="{{ url_for('export_grades') }}"class="btn btn-success">⬇️ Export Grades to CSV</a>
+<br> </br>
+<form method="POST" action="/grades">
+    <label>Student Name:</label>
+    <input type="text" name="student_name" required><br><br>
+
+    <label>Subject:</label>
+    <input type="text" name="subject" required><br><br>
+
+    <label>Score:</label>
+    <input type="number" name="score" min="0" max="100" required><br><br>
+
+    <label>Term:</label>
+    <input type="text" name="term" required><br><br>
+
+    <label>Remarks:</label>
+    <input type="text" name="remarks"><br><br>
+
+    <button type="submit">Add Grade</button>
+</form>
+
+<hr>
+
+<h3>📊 All Grades</h3>
+
+{% if grades %}
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>Student</th>
+        <th>Subject</th>
+        <th>Score</th>
+        <th>Grade Letter</th>
+        <th>Term</th>
+        <th>Remarks</th>
+    </tr>
+    {% for grade in grades %}
+    <tr>
+        <td>{{ grade.student_name }}</td>
+        <td>{{ grade.subject }}</td>
+        <td>{{ grade.score }}</td>
+        <td><strong>{{ grade.grade_letter }}</strong></td>
+        <td>{{ grade.term }}</td>
+        <td>{{ grade.remarks }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No grades have been added yet.</p>
+{% endif %}
+
+{% endblock %}

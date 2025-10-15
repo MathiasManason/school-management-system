@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Class</h2>
+
+<form method="POST">
+    <label>Class Name:</label>
+    <input type="text" name="name" value="{{ school_class.name }}" required><br><br>
+
+    <label>Teacher:</label>
+    <input type="text" name="teacher" value="{{ school_class.teacher }}" required><br><br>
+
+    <label>Students (comma-separated):</label>
+    <input type="text" name="students" value="{{ school_class.students | join(', ') }}"><br><br>
+
+    <input type="submit" value="Update Class">
+</form>
+
+<a href="{{ url_for('manage_classes') }}">← Back to Class List</a>
+{% endblock %}
